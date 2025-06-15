@@ -1,10 +1,18 @@
-const http = require('http');
+const express = require('express');
+const app = express();
+const PORT = 3000;
 
-const server = http.createServer((req, res) => {
-  res.end('Hello from Node.js Docker App');
+// Root route
+app.get('/', (req, res) => {
+  res.json({ message: '🚀 Hello from Dockerized Node.js App!' });
 });
 
-server.listen(3000, () => {
-  console.log('Server running on port 3000');
+// Health check route
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
 
